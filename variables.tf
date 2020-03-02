@@ -9,16 +9,6 @@ variable "controller_replicas" {
   type        = number
 }
 
-variable "controller_ip_address" {
-  description = "The ingress controller IP address"
-  type        = string
-}
-
-variable "controller_resource_group_name" {
-  description = "The ingress controller network resource group name"
-  type        = string
-}
-
 variable "controller_image" {
   description = "The ingress controller docker image name"
   default     = "traefik:v1.7"
@@ -29,4 +19,14 @@ variable "controller_metrics" {
   description = "Enable ingress controller prometheus metrics"
   default     = false
   type        = bool
+}
+
+variable "ip_address_name" {
+  description = "The IP address resource name"
+  type        = string
+}
+
+variable "ip_address_region" {
+  description = "The IP address resource location"
+  type        = string
 }

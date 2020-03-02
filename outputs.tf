@@ -8,16 +8,6 @@ output "controller_replicas" {
   value       = module.controller.replicas
 }
 
-output "controller_ip_address" {
-  description = "The ingress controller IP address"
-  value       = module.controller.ip_address
-}
-
-output "controller_resource_group_name" {
-  description = "The ingress controller network resource group name"
-  value       = module.controller.resource_group_name
-}
-
 output "controller_image" {
   description = "The ingress controller docker image name"
   value       = module.controller.image
@@ -26,4 +16,24 @@ output "controller_image" {
 output "controller_metrics" {
   description = "Enable ingress controller prometheus metrics"
   value       = module.controller.metrics
+}
+
+output "ip_address_name" {
+  description = "The IP address resource name"
+  value       = module.controller.ip_address
+}
+
+output "ip_address_region" {
+  description = "The IP address resource location"
+  value       = module.controller.resource_group_name
+}
+
+output "ip_address_ip_address" {
+  description = "The IP address value"
+  value       = module.ip_address.ip_address
+}
+
+output "ip_address_resource_group_name" {
+  description = "The IP address resource group name"
+  value       = module.ip_address.resource_group_name
 }
