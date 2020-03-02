@@ -48,3 +48,4 @@ module "aks_ingress" {
 ## Modules
 
 - [Controller](modules/controller/README.md)
+- [IP Address](modules/ip-address/README.md)
