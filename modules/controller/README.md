@@ -43,6 +43,8 @@ module "controller" {
 
 - The IP address must correspond to a Public IP resource in the given resource
   group in order for the Azure Kubernetes Service to accept it.
+- The IP address must be unique to this ingress controller as Kubernetes does
+  not currently allow IP addresses to be shared across services.
 
 ## References
 
