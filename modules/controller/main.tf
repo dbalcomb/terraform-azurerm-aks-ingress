@@ -92,6 +92,7 @@ resource "kubernetes_deployment" "main" {
         labels = local.labels
 
         annotations = {
+          "checksum/config"      = sha256(local.config)
           "prometheus.io/scrape" = var.metrics ? "true" : "false"
           "prometheus.io/path"   = var.metrics ? "/metrics" : null
           "prometheus.io/port"   = var.metrics ? "9100" : null
