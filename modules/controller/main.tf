@@ -56,7 +56,9 @@ resource "kubernetes_service" "main" {
 }
 
 locals {
-  config = file("${path.module}/templates/traefik.toml")
+  config = templatefile("${path.module}/templates/traefik.toml", {
+    metrics = var.metrics
+  })
 }
 
 resource "kubernetes_config_map" "main" {
@@ -88,6 +90,12 @@ resource "kubernetes_deployment" "main" {
     template {
       metadata {
         labels = local.labels
+
+        annotations = {
+          "prometheus.io/scrape" = var.metrics ? "true" : "false"
+          "prometheus.io/path"   = var.metrics ? "/metrics" : null
+          "prometheus.io/port"   = var.metrics ? "9100" : null
+        }
       }
 
       spec {
@@ -119,6 +127,16 @@ resource "kubernetes_deployment" "main" {
             name           = "ping"
             protocol       = "TCP"
             container_port = 8082
+          }
+
+          dynamic "port" {
+            for_each = var.metrics ? ["metrics"] : []
+
+            content {
+              name           = "metrics"
+              protocol       = "TCP"
+              container_port = 9100
+            }
           }
 
           readiness_probe {

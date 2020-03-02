@@ -6,4 +6,5 @@ module "controller" {
   ip_address          = var.controller_ip_address
   resource_group_name = var.controller_resource_group_name
   image               = var.controller_image
+  metrics             = var.controller_metrics
 }

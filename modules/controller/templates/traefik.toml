@@ -10,8 +10,19 @@ defaultEntryPoints = ["http", "https"]
   [entryPoints.ping]
     address = ":8082"
 
+  %{ if metrics }
+  [entryPoints.metrics]
+    address = ":9100"
+  %{ endif }
+
 [ping]
   entryPoint = "ping"
 
 [kubernetes]
   ingressClass = "traefik"
+
+%{ if metrics }
+[metrics]
+  [metrics.prometheus]
+    entryPoint = "metrics"
+%{ endif }
