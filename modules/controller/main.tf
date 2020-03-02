@@ -115,6 +115,40 @@ resource "kubernetes_deployment" "main" {
             container_port = 443
           }
 
+          port {
+            name           = "ping"
+            protocol       = "TCP"
+            container_port = 8082
+          }
+
+          readiness_probe {
+            initial_delay_seconds = 10
+            period_seconds        = 10
+            timeout_seconds       = 2
+            success_threshold     = 1
+            failure_threshold     = 1
+
+            http_get {
+              path   = "/ping"
+              port   = "ping"
+              scheme = "HTTP"
+            }
+          }
+
+          liveness_probe {
+            initial_delay_seconds = 10
+            period_seconds        = 10
+            timeout_seconds       = 2
+            success_threshold     = 1
+            failure_threshold     = 3
+
+            http_get {
+              path   = "/ping"
+              port   = "ping"
+              scheme = "HTTP"
+            }
+          }
+
           volume_mount {
             name       = "config"
             mount_path = "/config"
