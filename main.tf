@@ -1,8 +1,9 @@
 module "ip_address" {
   source = "./modules/ip-address"
 
-  name   = var.ip_address_name
-  region = var.ip_address_region
+  name                 = var.ip_address_name
+  region               = var.ip_address_region
+  service_principal_id = var.cluster_service_principal_id
 }
 
 module "controller" {
