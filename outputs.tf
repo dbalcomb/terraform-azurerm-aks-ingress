@@ -37,3 +37,8 @@ output "ip_address_resource_group_name" {
   description = "The IP address resource group name"
   value       = module.ip_address.resource_group_name
 }
+
+output "cluster_service_principal_id" {
+  description = "The cluster service principal ID"
+  value       = var.cluster_service_principal_id
+}

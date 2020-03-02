@@ -30,3 +30,8 @@ variable "ip_address_region" {
   description = "The IP address resource location"
   type        = string
 }
+
+variable "cluster_service_principal_id" {
+  description = "The cluster service principal ID"
+  type        = string
+}
