@@ -25,6 +25,7 @@ module "aks_ingress" {
 | controller_ip_address          | string |              | The ingress controller IP address                  |
 | controller_resource_group_name | string |              | The ingress controller network resource group name |
 | controller_image               | string | traefik:v1.7 | The ingress controller docker image name           |
+| controller_metrics             | bool   | false        | Enable ingress controller prometheus metrics       |
 
 ## Outputs
 
@@ -35,6 +36,7 @@ module "aks_ingress" {
 | controller_ip_address          | string | The ingress controller IP address                  |
 | controller_resource_group_name | string | The ingress controller network resource group name |
 | controller_image               | string | The ingress controller docker image name           |
+| controller_metrics             | bool   | Enable ingress controller prometheus metrics       |
 
 ## Modules
 

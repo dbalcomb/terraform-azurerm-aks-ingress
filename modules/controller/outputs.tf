@@ -22,3 +22,8 @@ output "image" {
   description = "The docker image name"
   value       = var.image
 }
+
+output "metrics" {
+  description = "Enable prometheus metrics"
+  value       = var.metrics
+}

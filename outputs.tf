@@ -22,3 +22,8 @@ output "controller_image" {
   description = "The ingress controller docker image name"
   value       = module.controller.image
 }
+
+output "controller_metrics" {
+  description = "Enable ingress controller prometheus metrics"
+  value       = module.controller.metrics
+}

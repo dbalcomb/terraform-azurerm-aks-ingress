@@ -26,6 +26,7 @@ module "controller" {
 | ip_address          | string |              | The ingress IP address          |
 | resource_group_name | string |              | The network resource group name |
 | image               | string | traefik:v1.7 | The docker image name           |
+| metrics             | bool   | false        | Enable prometheus metrics       |
 
 ## Outputs
 
@@ -36,6 +37,7 @@ module "controller" {
 | ip_address          | string | The ingress IP address          |
 | resource_group_name | string | The network resource group name |
 | image               | string | The docker image name           |
+| metrics             | bool   | Enable prometheus metrics       |
 
 ## Notes
 

@@ -24,3 +24,9 @@ variable "controller_image" {
   default     = "traefik:v1.7"
   type        = string
 }
+
+variable "controller_metrics" {
+  description = "Enable ingress controller prometheus metrics"
+  default     = false
+  type        = bool
+}

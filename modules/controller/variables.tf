@@ -24,3 +24,9 @@ variable "image" {
   default     = "traefik:v1.7"
   type        = string
 }
+
+variable "metrics" {
+  description = "Enable prometheus metrics"
+  default     = false
+  type        = bool
+}
