@@ -7,5 +7,11 @@ defaultEntryPoints = ["http", "https"]
   [entryPoints.https]
     address = ":443"
 
+  [entryPoints.ping]
+    address = ":8082"
+
+[ping]
+  entryPoint = "ping"
+
 [kubernetes]
   ingressClass = "traefik"
