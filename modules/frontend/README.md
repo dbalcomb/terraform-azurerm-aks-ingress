@@ -48,16 +48,22 @@ module "frontend" {
 
 ## Inputs
 
-| Name   | Type   | Default | Description             |
-| ------ | ------ | ------- | ----------------------- |
-| name   | string |         | The frontend name       |
-| routes | object |         | The route configuration |
-| class  | string | traefik | The ingress class       |
+| Name                         | Type     | Default   | Description                 |
+| ---------------------------- | -------- | --------- | --------------------------- |
+| `name`                       | `string` |           | The frontend name           |
+| `class`                      | `string` | `traefik` | The ingress class           |
+| `routes`                     | `object` |           | The route configuration     |
+| `routes.*.host`              | `string` |           | The route host              |
+| `routes.*.path`              | `string` |           | The route path              |
+| `routes.*.backend`           | `object` |           | The route backend           |
+| `routes.*.backend.name`      | `string` |           | The route backend name      |
+| `routes.*.backend.namespace` | `string` |           | The route backend namespace |
+| `routes.*.backend.port`      | `number` |           | The route backend port      |
 
 ## Outputs
 
-| Name   | Type   | Description             |
-| ------ | ------ | ----------------------- |
-| name   | string | The frontend name       |
-| routes | object | The route configuration |
-| class  | string | The ingress class       |
+| Name     | Type     | Description             |
+| -------- | -------- | ----------------------- |
+| `name`   | `string` | The frontend name       |
+| `class`  | `string` | The ingress class       |
+| `routes` | `object` | The route configuration |

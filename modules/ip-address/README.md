@@ -18,18 +18,18 @@ module "ip_address" {
 
 ## Inputs
 
-| Name                 | Type   | Default | Description                      |
-| -------------------- | ------ | ------- | -------------------------------- |
-| name                 | string |         | The resource name                |
-| region               | string |         | The resource location            |
-| service_principal_id | string |         | The cluster service principal ID |
+| Name                   | Type     | Default | Description                      |
+| ---------------------- | -------- | ------- | -------------------------------- |
+| `name`                 | `string` |         | The resource name                |
+| `region`               | `string` |         | The resource location            |
+| `service_principal_id` | `string` |         | The cluster service principal ID |
 
 ## Outputs
 
-| Name                 | Type   | Description                      |
-| -------------------- | ------ | -------------------------------- |
-| name                 | string | The resource name                |
-| region               | string | The resource location            |
-| service_principal_id | string | The cluster service principal ID |
-| ip_address           | string | The ingress IP address           |
-| resource_group_name  | string | The resource group name          |
+| Name                   | Type     | Description                      |
+| ---------------------- | -------- | -------------------------------- |
+| `name`                 | `string` | The resource name                |
+| `region`               | `string` | The resource location            |
+| `service_principal_id` | `string` | The cluster service principal ID |
+| `ip_address`           | `string` | The ingress IP address           |
+| `resource_group_name`  | `string` | The resource group name          |
