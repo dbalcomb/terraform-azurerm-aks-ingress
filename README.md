@@ -50,3 +50,4 @@ module "aks_ingress" {
 - [Controller](modules/controller/README.md)
 - [IP Address](modules/ip-address/README.md)
 - [Backend](modules/backend/README.md)
+- [Frontend](modules/frontend/README.md)

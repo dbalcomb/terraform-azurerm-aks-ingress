@@ -31,3 +31,6 @@ jobs:
 
     - name: Validate modules/backend
       run: terraform validate modules/backend
+
+    - name: Validate modules/frontend
+      run: terraform validate modules/frontend
