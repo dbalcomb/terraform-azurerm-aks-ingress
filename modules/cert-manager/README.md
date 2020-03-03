@@ -10,21 +10,24 @@ via HTTPS.
 module "cert_manager" {
   source = "github.com/dbalcomb/terraform-azurerm-aks-ingress//modules/cert-manager"
 
-  name = "aks-cert-manager"
+  name    = "aks-cert-manager"
+  metrics = true
 }
 ```
 
 ## Inputs
 
-| Name   | Type     | Default        | Description        |
-| ------ | -------- | -------------- | ------------------ |
-| `name` | `string` | `cert-manager` | The resource name  |
+| Name      | Type     | Default        | Description               |
+| --------- | -------- | -------------- | ------------------------- |
+| `name`    | `string` | `cert-manager` | The resource name         |
+| `metrics` | `bool`   | `false`        | Enable prometheus metrics |
 
 ## Outputs
 
-| Name   | Type     | Description        |
-| ------ | -------- | ------------------ |
-| `name` | `string` | The resource name  |
+| Name      | Type     | Description               |
+| --------- | -------- | ------------------------- |
+| `name`    | `string` | The resource name         |
+| `metrics` | `bool`   | Enable prometheus metrics |
 
 ## Notes
 
