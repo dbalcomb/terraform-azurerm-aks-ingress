@@ -19,27 +19,27 @@ module "controller" {
 
 ## Inputs
 
-| Name                | Type   | Default      | Description                     |
-| ------------------- | ------ | ------------ | ------------------------------- |
-| name                | string |              | The resource name               |
-| replicas            | number | 1            | The replica count               |
-| ip_address          | string |              | The ingress IP address          |
-| resource_group_name | string |              | The network resource group name |
-| image               | string | traefik:v1.7 | The docker image name           |
-| class               | string | traefik      | The ingress class               |
-| metrics             | bool   | false        | Enable prometheus metrics       |
+| Name                  | Type     | Default        | Description                     |
+| --------------------- | -------- | -------------- | ------------------------------- |
+| `name`                | `string` |                | The resource name               |
+| `replicas`            | `number` | `1`            | The replica count               |
+| `ip_address`          | `string` |                | The ingress IP address          |
+| `resource_group_name` | `string` |                | The network resource group name |
+| `image`               | `string` | `traefik:v1.7` | The docker image name           |
+| `class`               | `string` | `traefik`      | The ingress class               |
+| `metrics`             | `bool`   | `false`        | Enable prometheus metrics       |
 
 ## Outputs
 
-| Name                | Type   | Description                     |
-| ------------------- | ------ | ------------------------------- |
-| name                | string | The resource name               |
-| replicas            | number | The replica count               |
-| ip_address          | string | The ingress IP address          |
-| resource_group_name | string | The network resource group name |
-| image               | string | The docker image name           |
-| class               | string | The ingress class               |
-| metrics             | bool   | Enable prometheus metrics       |
+| Name                  | Type     | Description                     |
+| --------------------- | -------- | ------------------------------- |
+| `name`                | `string` | The resource name               |
+| `replicas`            | `number` | The replica count               |
+| `ip_address`          | `string` | The ingress IP address          |
+| `resource_group_name` | `string` | The network resource group name |
+| `image`               | `string` | The docker image name           |
+| `class`               | `string` | The ingress class               |
+| `metrics`             | `bool`   | Enable prometheus metrics       |
 
 ## Notes
 
