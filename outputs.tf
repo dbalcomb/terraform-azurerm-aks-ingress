@@ -42,3 +42,8 @@ output "cluster_service_principal_id" {
   description = "The cluster service principal ID"
   value       = var.cluster_service_principal_id
 }
+
+output "class" {
+  description = "The ingress class"
+  value       = var.class
+}

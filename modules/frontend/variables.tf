@@ -15,3 +15,9 @@ variable "routes" {
     })
   }))
 }
+
+variable "class" {
+  description = "The ingress class"
+  default     = "traefik"
+  type        = string
+}

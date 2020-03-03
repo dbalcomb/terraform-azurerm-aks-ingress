@@ -23,6 +23,11 @@ output "image" {
   value       = var.image
 }
 
+output "class" {
+  description = "The ingress class"
+  value       = var.class
+}
+
 output "metrics" {
   description = "Enable prometheus metrics"
   value       = var.metrics

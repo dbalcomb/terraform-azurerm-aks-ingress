@@ -57,6 +57,7 @@ resource "kubernetes_service" "main" {
 
 locals {
   config = templatefile("${path.module}/templates/traefik.toml", {
+    class   = var.class
     metrics = var.metrics
   })
 }

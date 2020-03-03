@@ -7,6 +7,12 @@ services.
 ## Usage
 
 ```hcl
+module "ingress" {
+  source = "github.com/dbalcomb/terraform-azurerm-aks-ingress"
+
+  # ...
+}
+
 module "backend" {
   source = "github.com/dbalcomb/terraform-azurerm-aks-ingress//modules/backend"
 
@@ -16,7 +22,8 @@ module "backend" {
 module "frontend" {
   source = "github.com/dbalcomb/terraform-azurerm-aks-ingress//modules/frontend"
 
-  name = "aks-frontend"
+  name  = "aks-frontend"
+  class = module.ingress.class
 
   routes = {
     one = {
@@ -45,6 +52,7 @@ module "frontend" {
 | ------ | ------ | ------- | ----------------------- |
 | name   | string |         | The frontend name       |
 | routes | object |         | The route configuration |
+| class  | string | traefik | The ingress class       |
 
 ## Outputs
 
@@ -52,3 +60,4 @@ module "frontend" {
 | ------ | ------ | ----------------------- |
 | name   | string | The frontend name       |
 | routes | object | The route configuration |
+| class  | string | The ingress class       |

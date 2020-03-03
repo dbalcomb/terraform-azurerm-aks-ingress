@@ -14,5 +14,6 @@ module "controller" {
   ip_address          = module.ip_address.ip_address
   resource_group_name = module.ip_address.resource_group_name
   image               = var.controller_image
+  class               = var.class
   metrics             = var.controller_metrics
 }

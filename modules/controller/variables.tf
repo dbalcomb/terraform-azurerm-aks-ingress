@@ -25,6 +25,12 @@ variable "image" {
   type        = string
 }
 
+variable "class" {
+  description = "The ingress class"
+  default     = "traefik"
+  type        = string
+}
+
 variable "metrics" {
   description = "Enable prometheus metrics"
   default     = false
