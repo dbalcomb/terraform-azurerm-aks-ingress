@@ -26,8 +26,10 @@ module "backend" {
 
 ## Outputs
 
-| Name     | Type   | Description           |
-| -------- | ------ | --------------------- |
-| name     | string | The backend name      |
-| image    | string | The docker image name |
-| replicas | number | The replica count     |
+| Name      | Type   | Description           |
+| --------- | ------ | --------------------- |
+| name      | string | The backend name      |
+| namespace | string | The backend namespace |
+| port      | number | The backend port      |
+| image     | string | The docker image name |
+| replicas  | number | The replica count     |
