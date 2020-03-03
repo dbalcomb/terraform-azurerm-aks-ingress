@@ -7,3 +7,8 @@ output "routes" {
   description = "The route configuration"
   value       = var.routes
 }
+
+output "class" {
+  description = "The ingress class"
+  value       = var.class
+}

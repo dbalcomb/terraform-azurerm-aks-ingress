@@ -19,7 +19,7 @@ defaultEntryPoints = ["http", "https"]
   entryPoint = "ping"
 
 [kubernetes]
-  ingressClass = "traefik"
+  ingressClass = ${ class }
 
 %{ if metrics }
 [metrics]

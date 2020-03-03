@@ -30,6 +30,7 @@ module "aks_ingress" {
 | ip_address_name              | string |              | The IP address resource name                 |
 | ip_address_region            | string |              | The IP address resource location             |
 | cluster_service_principal_id | string |              | The cluster service principal ID             |
+| class                        | string | traefik      | The ingress class                            |
 
 ## Outputs
 
@@ -44,6 +45,7 @@ module "aks_ingress" {
 | ip_address_ip_address          | string | The IP address value                         |
 | ip_address_resource_group_name | string | The IP address resource group name           |
 | cluster_service_principal_id   | string | The cluster service principal ID             |
+| class                          | string | The ingress class                            |
 
 ## Modules
 

@@ -17,7 +17,7 @@ resource "kubernetes_ingress" "main" {
     labels    = local.labels
 
     annotations = {
-      "kubernetes.io/ingress.class" = "traefik"
+      "kubernetes.io/ingress.class" = var.class
     }
   }
 

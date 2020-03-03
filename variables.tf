@@ -35,3 +35,9 @@ variable "cluster_service_principal_id" {
   description = "The cluster service principal ID"
   type        = string
 }
+
+variable "class" {
+  description = "The ingress class"
+  default     = "traefik"
+  type        = string
+}
