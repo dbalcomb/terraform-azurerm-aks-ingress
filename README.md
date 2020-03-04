@@ -54,3 +54,4 @@ module "aks_ingress" {
 - [Backend](modules/backend/README.md)
 - [Frontend](modules/frontend/README.md)
 - [Certificate Manager](modules/cert-manager/README.md)
+- [Host](modules/host/README.md)
