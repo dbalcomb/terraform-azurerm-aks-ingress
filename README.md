@@ -52,7 +52,6 @@ module "aks_ingress" {
 - [Controller](modules/controller/README.md)
 - [IP Address](modules/ip-address/README.md)
 - [Backend](modules/backend/README.md)
-- [Frontend](modules/frontend/README.md)
 - [Certificate Manager](modules/cert-manager/README.md)
 - [Host](modules/host/README.md)
 - [Route](modules/route/README.md)
