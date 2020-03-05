@@ -52,10 +52,10 @@ module "route" {
 
 ## Outputs
 
-| Name                | Type     | Description               |
-| ------------------- | -------- | ------------------------- |
-| `name`              | `string` | The route name            |
-| `path`              | `string` | The route path            |
-| `host`              | `object` | The host configuration    |
-| `backend`           | `object` | The backend configuration |
-| `ingress`           | `object` | The ingress configuration |
+| Name      | Type     | Description               |
+| --------- | -------- | ------------------------- |
+| `name`    | `string` | The route name            |
+| `path`    | `string` | The route path            |
+| `host`    | `object` | The host configuration    |
+| `backend` | `object` | The backend configuration |
+| `ingress` | `object` | The ingress configuration |
