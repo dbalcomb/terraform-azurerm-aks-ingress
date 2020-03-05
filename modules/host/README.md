@@ -1,7 +1,7 @@
 # Host
 
 This module configures an ingress host domain / subdomain that points to the
-Azure Kubernetes Service (AKS) ingress. The frontend module can then use the
+Azure Kubernetes Service (AKS) ingress. The route module can then use the
 output to ensure that the DNS records are created first.
 
 ## Usage
