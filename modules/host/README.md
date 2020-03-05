@@ -24,7 +24,7 @@ module "host" {
   }
 
   ip_address = {
-    name  = module.ingress.ip_address_name
+    name  = "${module.ingress.ip_address_name}-ip"
     group = module.ingress.ip_address_resource_group_name
   }
 }
