@@ -20,12 +20,12 @@ output "controller_metrics" {
 
 output "ip_address_name" {
   description = "The IP address resource name"
-  value       = module.controller.ip_address
+  value       = module.ip_address.name
 }
 
 output "ip_address_region" {
   description = "The IP address resource location"
-  value       = module.controller.resource_group_name
+  value       = module.ip_address.region
 }
 
 output "ip_address_ip_address" {
