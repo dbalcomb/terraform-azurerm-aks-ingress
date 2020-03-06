@@ -31,3 +31,11 @@ variable "ingress" {
     class = string
   })
 }
+
+variable "issuer" {
+  description = "The issuer configuration"
+  default     = null
+  type = object({
+    name = string
+  })
+}

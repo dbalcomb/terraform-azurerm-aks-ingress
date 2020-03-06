@@ -24,6 +24,12 @@ module "host" {
   # ...
 }
 
+module "issuer" {
+  source = "github.com/dbalcomb/terraform-azurerm-aks-cert-manager//modules/issuer"
+
+  # ...
+}
+
 module "route" {
   source = "github.com/dbalcomb/terraform-azurerm-aks-ingress//modules/route"
 
@@ -32,6 +38,7 @@ module "route" {
   host    = module.host
   backend = module.backend
   ingress = module.ingress
+  issuer  = module.issuer
 }
 ```
 
@@ -49,6 +56,8 @@ module "route" {
 | `backend.port`      | `number` |         | The backend port          |
 | `ingress`           | `object` |         | The ingress configuration |
 | `ingress.class`     | `string` |         | The ingress class         |
+| `issuer`            | `object` | `null`  | The issuer configuration  |
+| `issuer.name`       | `string` |         | The issuer name           |
 
 ## Outputs
 
@@ -59,3 +68,4 @@ module "route" {
 | `host`    | `object` | The host configuration    |
 | `backend` | `object` | The backend configuration |
 | `ingress` | `object` | The ingress configuration |
+| `issuer`  | `object` | The issuer configuration  |

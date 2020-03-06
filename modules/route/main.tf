@@ -15,7 +15,9 @@ resource "kubernetes_ingress" "main" {
     labels    = local.labels
 
     annotations = {
-      "kubernetes.io/ingress.class" = var.ingress.class
+      "kubernetes.io/ingress.class"                        = var.ingress.class
+      "cert-manager.io/cluster-issuer"                     = try(var.issuer.name, null)
+      "traefik.ingress.kubernetes.io/redirect-entry-point" = can(var.issuer.name) ? "https" : null
     }
   }
 
@@ -32,6 +34,15 @@ resource "kubernetes_ingress" "main" {
             service_port = var.backend.port
           }
         }
+      }
+    }
+
+    dynamic "tls" {
+      for_each = can(var.issuer.name) ? ["issuer"] : []
+
+      content {
+        secret_name = format("%s-tls", var.name)
+        hosts       = [var.host.name]
       }
     }
   }
