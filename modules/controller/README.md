@@ -22,6 +22,7 @@ module "controller" {
 | Name                  | Type     | Default        | Description                     |
 | --------------------- | -------- | -------------- | ------------------------------- |
 | `name`                | `string` |                | The resource name               |
+| `namespace`           | `string` |                | The resource namespace          |
 | `replicas`            | `number` | `1`            | The replica count               |
 | `ip_address`          | `string` |                | The ingress IP address          |
 | `resource_group_name` | `string` |                | The network resource group name |
@@ -34,6 +35,7 @@ module "controller" {
 | Name                  | Type     | Description                     |
 | --------------------- | -------- | ------------------------------- |
 | `name`                | `string` | The resource name               |
+| `namespace`           | `string` | The resource namespace          |
 | `replicas`            | `number` | The replica count               |
 | `ip_address`          | `string` | The ingress IP address          |
 | `resource_group_name` | `string` | The network resource group name |

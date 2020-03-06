@@ -1,3 +1,9 @@
+resource "kubernetes_namespace" "main" {
+  metadata {
+    name = var.controller_name
+  }
+}
+
 module "ip_address" {
   source = "./modules/ip-address"
 
@@ -10,6 +16,7 @@ module "controller" {
   source = "./modules/controller"
 
   name                = var.controller_name
+  namespace           = kubernetes_namespace.main.metadata.0.name
   replicas            = var.controller_replicas
   ip_address          = module.ip_address.ip_address
   resource_group_name = module.ip_address.resource_group_name

@@ -3,6 +3,11 @@ output "name" {
   value       = var.name
 }
 
+output "namespace" {
+  description = "The resource namespace"
+  value       = var.namespace
+}
+
 output "replicas" {
   description = "The replica count"
   value       = var.replicas
