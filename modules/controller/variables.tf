@@ -3,6 +3,11 @@ variable "name" {
   type        = string
 }
 
+variable "namespace" {
+  description = "The resource namespace"
+  type        = string
+}
+
 variable "replicas" {
   description = "The replica count"
   default     = 1

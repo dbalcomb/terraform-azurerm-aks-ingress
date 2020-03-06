@@ -8,17 +8,10 @@ locals {
   }
 }
 
-resource "kubernetes_namespace" "main" {
-  metadata {
-    name   = var.name
-    labels = local.labels
-  }
-}
-
 resource "kubernetes_service_account" "main" {
   metadata {
     name      = var.name
-    namespace = kubernetes_namespace.main.metadata.0.name
+    namespace = var.namespace
     labels    = local.labels
   }
 }
@@ -26,7 +19,7 @@ resource "kubernetes_service_account" "main" {
 resource "kubernetes_service" "main" {
   metadata {
     name      = var.name
-    namespace = kubernetes_namespace.main.metadata.0.name
+    namespace = var.namespace
     labels    = local.labels
 
     annotations = {
@@ -65,7 +58,7 @@ locals {
 resource "kubernetes_config_map" "main" {
   metadata {
     name      = format("%s-config", var.name)
-    namespace = kubernetes_namespace.main.metadata.0.name
+    namespace = var.namespace
     labels    = local.labels
   }
 
@@ -77,7 +70,7 @@ resource "kubernetes_config_map" "main" {
 resource "kubernetes_deployment" "main" {
   metadata {
     name      = var.name
-    namespace = kubernetes_namespace.main.metadata.0.name
+    namespace = var.namespace
     labels    = local.labels
   }
 
@@ -191,7 +184,7 @@ resource "kubernetes_deployment" "main" {
 resource "kubernetes_pod_disruption_budget" "main" {
   metadata {
     name      = format("%s-pdb", var.name)
-    namespace = kubernetes_namespace.main.metadata.0.name
+    namespace = var.namespace
     labels    = local.labels
   }
 
