@@ -3,12 +3,12 @@ variable "name" {
   type        = string
 }
 
-variable "region" {
-  description = "The resource location"
+variable "group" {
+  description = "The resource group"
   type        = string
 }
 
-variable "service_principal_id" {
-  description = "The cluster service principal ID"
+variable "region" {
+  description = "The resource location"
   type        = string
 }

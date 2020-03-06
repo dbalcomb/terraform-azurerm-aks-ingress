@@ -35,7 +35,7 @@ output "ip_address_ip_address" {
 
 output "ip_address_resource_group_name" {
   description = "The IP address resource group name"
-  value       = module.ip_address.resource_group_name
+  value       = module.ip_address.group
 }
 
 output "cluster_service_principal_id" {
