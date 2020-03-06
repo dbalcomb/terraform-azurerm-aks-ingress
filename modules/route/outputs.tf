@@ -22,3 +22,8 @@ output "ingress" {
   description = "The ingress configuration"
   value       = var.ingress
 }
+
+output "issuer" {
+  description = "The issuer configuration"
+  value       = var.issuer
+}
