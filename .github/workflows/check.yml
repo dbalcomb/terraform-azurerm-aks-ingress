@@ -37,8 +37,3 @@ jobs:
 
     - name: Validate modules/route
       run: terraform validate modules/route
-
-    - name: Validate modules/cert-manager
-      run: |
-        terraform init -backend=false modules/cert-manager
-        terraform validate modules/cert-manager
