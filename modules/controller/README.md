@@ -10,43 +10,45 @@ traffic through the cluster to the appropriate backend service.
 module "controller" {
   source = "github.com/dbalcomb/terraform-azurerm-aks-ingress//modules/controller"
 
-  name                = "aks-ingress"
-  replicas            = 3
-  ip_address          = "93.184.216.34"
-  resource_group_name = "aks-network-rg"
+  name      = "aks-ingress-controller"
+  namespace = "aks-ingress"
+  replicas  = 3
+
+  ip_address = {
+    group = "aks-ingress-rg"
+    value = "93.184.216.34"
+  }
 }
 ```
 
 ## Inputs
 
-| Name                  | Type     | Default        | Description                     |
-| --------------------- | -------- | -------------- | ------------------------------- |
-| `name`                | `string` |                | The resource name               |
-| `namespace`           | `string` |                | The resource namespace          |
-| `replicas`            | `number` | `1`            | The replica count               |
-| `ip_address`          | `string` |                | The ingress IP address          |
-| `resource_group_name` | `string` |                | The network resource group name |
-| `image`               | `string` | `traefik:v1.7` | The docker image name           |
-| `class`               | `string` | `traefik`      | The ingress class               |
-| `metrics`             | `bool`   | `false`        | Enable prometheus metrics       |
+| Name               | Type     | Default        | Description                          |
+| ------------------ | -------- | -------------- | ------------------------------------ |
+| `name`             | `string` |                | The ingress controller name          |
+| `namespace`        | `string` |                | The ingress controller namespace     |
+| `replicas`         | `number` | `1`            | The ingress controller replica count |
+| `image`            | `string` | `traefik:v1.7` | The ingress controller docker image  |
+| `class`            | `string` | `traefik`      | The ingress class                    |
+| `metrics`          | `bool`   | `false`        | Enable prometheus metrics            |
+| `ip_address`       | `object` |                | The ingress IP address configuration |
+| `ip_address.group` | `string` |                | The ingress IP address group         |
+| `ip_address.value` | `string` |                | The ingress IP address value         |
 
 ## Outputs
 
-| Name                  | Type     | Description                     |
-| --------------------- | -------- | ------------------------------- |
-| `name`                | `string` | The resource name               |
-| `namespace`           | `string` | The resource namespace          |
-| `replicas`            | `number` | The replica count               |
-| `ip_address`          | `string` | The ingress IP address          |
-| `resource_group_name` | `string` | The network resource group name |
-| `image`               | `string` | The docker image name           |
-| `class`               | `string` | The ingress class               |
-| `metrics`             | `bool`   | Enable prometheus metrics       |
+| Name        | Type     | Description                          |
+| ----------- | -------- | ------------------------------------ |
+| `name`      | `string` | The ingress controller name          |
+| `namespace` | `string` | The ingress controller namespace     |
+| `replicas`  | `number` | The ingress controller replica count |
+| `image`     | `string` | The ingress controller docker image  |
+| `class`     | `string` | The ingress class                    |
+| `metrics`   | `bool`   | Enable prometheus metrics            |
+| `ip_address | `object` | The ingress IP address configuration |
 
 ## Notes
 
-- The IP address must correspond to a Public IP resource in the given resource
-  group in order for the Azure Kubernetes Service to accept it.
 - The IP address must be unique to this ingress controller as Kubernetes does
   not currently allow IP addresses to be shared across services.
 

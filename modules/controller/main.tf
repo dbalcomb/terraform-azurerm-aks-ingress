@@ -23,13 +23,13 @@ resource "kubernetes_service" "main" {
     labels    = local.labels
 
     annotations = {
-      "service.beta.kubernetes.io/azure-load-balancer-resource-group" = var.resource_group_name
+      "service.beta.kubernetes.io/azure-load-balancer-resource-group" = var.ip_address.group
     }
   }
 
   spec {
     type             = "LoadBalancer"
-    load_balancer_ip = var.ip_address
+    load_balancer_ip = var.ip_address.value
     selector         = local.labels
 
     port {

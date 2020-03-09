@@ -1,6 +1,6 @@
 resource "azurerm_resource_group" "main" {
-  name     = format("%s-rg", var.ip_address_name)
-  location = var.ip_address_region
+  name     = format("%s-rg", var.name)
+  location = var.region
 
   tags = {
     provisioner = "terraform"
@@ -8,34 +8,33 @@ resource "azurerm_resource_group" "main" {
 }
 
 resource "azurerm_role_assignment" "main" {
-  principal_id         = var.cluster_service_principal_id
+  principal_id         = var.cluster.service_principal.id
   scope                = azurerm_resource_group.main.id
   role_definition_name = "Network Contributor"
 }
 
 resource "kubernetes_namespace" "main" {
   metadata {
-    name = var.controller_name
+    name = var.name
   }
 }
 
 module "ip_address" {
   source = "./modules/ip-address"
 
-  name   = var.ip_address_name
+  name   = format("%s-ip", var.name)
   group  = azurerm_resource_group.main.name
-  region = var.ip_address_region
+  region = azurerm_resource_group.main.location
 }
 
 module "controller" {
   source = "./modules/controller"
 
-  name                = var.controller_name
-  namespace           = kubernetes_namespace.main.metadata.0.name
-  replicas            = var.controller_replicas
-  ip_address          = module.ip_address.ip_address
-  resource_group_name = azurerm_resource_group.main.name
-  image               = var.controller_image
-  class               = var.class
-  metrics             = var.controller_metrics
+  name       = format("%s-controller", var.name)
+  namespace  = kubernetes_namespace.main.metadata.0.name
+  replicas   = var.replicas
+  image      = var.image
+  class      = var.class
+  metrics    = var.metrics
+  ip_address = module.ip_address
 }

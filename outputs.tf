@@ -1,49 +1,44 @@
-output "controller_name" {
-  description = "The ingress controller resource name"
-  value       = module.controller.name
+output "name" {
+  description = "The ingress name"
+  value       = var.name
 }
 
-output "controller_replicas" {
-  description = "The ingress controller replica count"
-  value       = module.controller.replicas
+output "region" {
+  description = "The ingress region"
+  value       = var.region
 }
 
-output "controller_image" {
-  description = "The ingress controller docker image name"
-  value       = module.controller.image
+output "replicas" {
+  description = "The ingress replica count"
+  value       = var.replicas
 }
 
-output "controller_metrics" {
-  description = "Enable ingress controller prometheus metrics"
-  value       = module.controller.metrics
-}
-
-output "ip_address_name" {
-  description = "The IP address resource name"
-  value       = module.ip_address.name
-}
-
-output "ip_address_region" {
-  description = "The IP address resource location"
-  value       = module.ip_address.region
-}
-
-output "ip_address_ip_address" {
-  description = "The IP address value"
-  value       = module.ip_address.ip_address
-}
-
-output "ip_address_resource_group_name" {
-  description = "The IP address resource group name"
-  value       = module.ip_address.group
-}
-
-output "cluster_service_principal_id" {
-  description = "The cluster service principal ID"
-  value       = var.cluster_service_principal_id
+output "image" {
+  description = "The ingress docker image"
+  value       = var.image
 }
 
 output "class" {
   description = "The ingress class"
   value       = var.class
+}
+
+output "metrics" {
+  description = "Enable prometheus metrics"
+  value       = var.metrics
+}
+
+output "cluster" {
+  description = "The cluster configuration"
+  value       = var.cluster
+}
+
+output "controller" {
+  description = "The controller configuration"
+  value       = module.controller
+}
+
+output "ip_address" {
+  description = "The IP address configuration"
+  value       = module.ip_address
 }

@@ -1,19 +1,24 @@
+output "id" {
+  description = "The IP address ID"
+  value       = azurerm_public_ip.main.id
+}
+
 output "name" {
-  description = "The resource name"
-  value       = var.name
+  description = "The IP address name"
+  value       = azurerm_public_ip.main.name
 }
 
 output "group" {
-  description = "The resource group"
-  value       = var.group
+  description = "The IP address group"
+  value       = azurerm_public_ip.main.resource_group_name
 }
 
 output "region" {
-  description = "The resource location"
-  value       = var.region
+  description = "The IP address region"
+  value       = azurerm_public_ip.main.location
 }
 
-output "ip_address" {
-  description = "The ingress IP address"
+output "value" {
+  description = "The IP address value"
   value       = azurerm_public_ip.main.ip_address
 }
