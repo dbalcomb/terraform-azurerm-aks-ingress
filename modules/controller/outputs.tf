@@ -1,30 +1,20 @@
 output "name" {
-  description = "The resource name"
+  description = "The ingress controller name"
   value       = var.name
 }
 
 output "namespace" {
-  description = "The resource namespace"
+  description = "The ingress controller namespace"
   value       = var.namespace
 }
 
 output "replicas" {
-  description = "The replica count"
+  description = "The ingress controller replica count"
   value       = var.replicas
 }
 
-output "ip_address" {
-  description = "The ingress IP address"
-  value       = var.ip_address
-}
-
-output "resource_group_name" {
-  description = "The network resource group name"
-  value       = var.resource_group_name
-}
-
 output "image" {
-  description = "The docker image name"
+  description = "The ingress controller docker image"
   value       = var.image
 }
 
@@ -36,4 +26,9 @@ output "class" {
 output "metrics" {
   description = "Enable prometheus metrics"
   value       = var.metrics
+}
+
+output "ip_address" {
+  description = "The ingress IP address configuration"
+  value       = var.ip_address
 }

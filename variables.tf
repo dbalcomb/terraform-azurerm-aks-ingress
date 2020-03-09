@@ -1,38 +1,22 @@
-variable "controller_name" {
-  description = "The ingress controller resource name"
+variable "name" {
+  description = "The ingress name"
   type        = string
 }
 
-variable "controller_replicas" {
-  description = "The ingress controller replica count"
+variable "region" {
+  description = "The ingress region"
+  type        = string
+}
+
+variable "replicas" {
+  description = "The ingress replica count"
   default     = 1
   type        = number
 }
 
-variable "controller_image" {
-  description = "The ingress controller docker image name"
+variable "image" {
+  description = "The ingress docker image"
   default     = "traefik:v1.7"
-  type        = string
-}
-
-variable "controller_metrics" {
-  description = "Enable ingress controller prometheus metrics"
-  default     = false
-  type        = bool
-}
-
-variable "ip_address_name" {
-  description = "The IP address resource name"
-  type        = string
-}
-
-variable "ip_address_region" {
-  description = "The IP address resource location"
-  type        = string
-}
-
-variable "cluster_service_principal_id" {
-  description = "The cluster service principal ID"
   type        = string
 }
 
@@ -40,4 +24,19 @@ variable "class" {
   description = "The ingress class"
   default     = "traefik"
   type        = string
+}
+
+variable "metrics" {
+  description = "Enable prometheus metrics"
+  default     = false
+  type        = bool
+}
+
+variable "cluster" {
+  description = "The cluster configuration"
+  type = object({
+    service_principal = object({
+      id = string
+    })
+  })
 }

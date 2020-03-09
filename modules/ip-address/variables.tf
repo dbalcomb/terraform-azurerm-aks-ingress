@@ -1,14 +1,14 @@
 variable "name" {
-  description = "The resource name"
+  description = "The IP address name"
   type        = string
 }
 
 variable "group" {
-  description = "The resource group"
+  description = "The IP address group"
   type        = string
 }
 
 variable "region" {
-  description = "The resource location"
+  description = "The IP address region"
   type        = string
 }

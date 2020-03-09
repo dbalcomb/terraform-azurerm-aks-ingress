@@ -20,15 +20,16 @@ module "ip_address" {
 
 | Name     | Type     | Default | Description           |
 | -------- | -------- | ------- | --------------------- |
-| `name`   | `string` |         | The resource name     |
-| `group`  | `string` |         | The resource group    |
-| `region` | `string` |         | The resource location |
+| `name`   | `string` |         | The IP address name   |
+| `group`  | `string` |         | The IP address group  |
+| `region` | `string` |         | The IP address region |
 
 ## Outputs
 
-| Name         | Type     | Description            |
-| ------------ | -------- | ---------------------- |
-| `name`       | `string` | The resource name      |
-| `group`      | `string` | The resource group     |
-| `region`     | `string` | The resource location  |
-| `ip_address` | `string` | The ingress IP address |
+| Name     | Type     | Description           |
+| -------- | -------- | --------------------- |
+| `id`     | `string` | The IP address ID     |
+| `name`   | `string` | The IP address name   |
+| `group`  | `string` | The IP address group  |
+| `region` | `string` | The IP address region |
+| `value`  | `string` | The IP address value  |

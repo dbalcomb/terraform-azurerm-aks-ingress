@@ -9,43 +9,46 @@ Ingress Terraform Module.
 module "aks_ingress" {
   source = "github.com/dbalcomb/terraform-azurerm-aks-ingress"
 
-  ip_address_name   = "aks-ingress"
-  ip_address_region = "uksouth"
+  name     = "aks-ingress"
+  region   = "uksouth"
+  replicas = 3
+  metrics  = true
 
-  controller_name     = "aks-ingress"
-  controller_replicas = 3
-
-  cluster_service_principal_id = "00000000-0000-0000-0000-000000000000"
+  cluster = {
+    service_principal = {
+      id = "00000000-0000-0000-0000-000000000000"
+    }
+  }
 }
 ```
 
 ## Inputs
 
-| Name                           | Type     | Default        | Description                                  |
-| ------------------------------ | -------- | -------------- | -------------------------------------------- |
-| `controller_name`              | `string` |                | The ingress controller resource name         |
-| `controller_replicas`          | `number` | `1`            | The ingress controller replica count         |
-| `controller_image`             | `string` | `traefik:v1.7` | The ingress controller docker image name     |
-| `controller_metrics`           | `bool`   | `false`        | Enable ingress controller prometheus metrics |
-| `ip_address_name`              | `string` |                | The IP address resource name                 |
-| `ip_address_region`            | `string` |                | The IP address resource location             |
-| `cluster_service_principal_id` | `string` |                | The cluster service principal ID             |
-| `class`                        | `string` | `traefik`      | The ingress class                            |
+| Name                           | Type     | Default        | Description                                 |
+| ------------------------------ | -------- | -------------- | ------------------------------------------- |
+| `name`                         | `string` |                | The ingress name                            |
+| `region`                       | `string` |                | The ingress region                          |
+| `replicas`                     | `number` | `1`            | The ingress replica count                   |
+| `image`                        | `string` | `traefik:v1.7` | The ingress docker image                    |
+| `class`                        | `string` | `traefik`      | The ingress class                           |
+| `metrics`                      | `bool`   | `false`        | Enable prometheus metrics                   |
+| `cluster`                      | `object` |                | The cluster configuration                   |
+| `cluster.service_principal`    | `object` |                | The cluster service principal configuration |
+| `cluster.service_principal.id` | `string` |                | The cluster service principal ID            |
 
 ## Outputs
 
-| Name                             | Type     | Description                                  |
-| -------------------------------- | -------- | -------------------------------------------- |
-| `controller_name`                | `string` | The ingress controller resource name         |
-| `controller_replicas`            | `number` | The ingress controller replica count         |
-| `controller_image`               | `string` | The ingress controller docker image name     |
-| `controller_metrics`             | `bool`   | Enable ingress controller prometheus metrics |
-| `ip_address_name`                | `string` | The IP address resource name                 |
-| `ip_address_region`              | `string` | The IP address resource location             |
-| `ip_address_ip_address`          | `string` | The IP address value                         |
-| `ip_address_resource_group_name` | `string` | The IP address resource group name           |
-| `cluster_service_principal_id`   | `string` | The cluster service principal ID             |
-| `class`                          | `string` | The ingress class                            |
+| Name         | Type     | Description                  |
+| ------------ | -------- | ---------------------------- |
+| `name`       | `string` | The ingress name             |
+| `region`     | `string` | The ingress region           |
+| `replicas`   | `number` | The ingress replica count    |
+| `image`      | `string` | The ingress docker image     |
+| `class`      | `string` | The ingress class            |
+| `metrics`    | `bool`   | Enable prometheus metrics    |
+| `cluster`    | `string` | The cluster configuration    |
+| `controller` | `object` | The controller configuration |
+| `ip_address` | `object` | The IP address configuration |
 
 ## Modules
 
