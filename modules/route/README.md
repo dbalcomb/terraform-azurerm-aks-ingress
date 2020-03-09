@@ -19,7 +19,7 @@ module "backend" {
 }
 
 module "host" {
-  source = "github.com/dbalcomb/terraform-azurerm-aks-ingress//modules/host"
+  source = "github.com/dbalcomb/terraform-azurerm-dns//modules/host"
 
   # ...
 }
