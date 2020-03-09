@@ -55,9 +55,10 @@ module "aks_ingress" {
 - [Controller](modules/controller/README.md)
 - [IP Address](modules/ip-address/README.md)
 - [Backend](modules/backend/README.md)
-- [Host](modules/host/README.md)
 - [Route](modules/route/README.md)
 
 ## External Modules
 
 - [Certificate Manager](https://github.com/dbalcomb/terraform-azurerm-aks-cert-manager)
+- [DNS Zone](https://github.com/dbalcomb/terraform-azurerm-dns/tree/master/modules/zone)
+- [DNS Host](https://github.com/dbalcomb/terraform-azurerm-dns/tree/master/modules/host)
