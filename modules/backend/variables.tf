@@ -19,3 +19,9 @@ variable "replicas" {
   default     = 1
   type        = number
 }
+
+variable "volumes" {
+  description = "The volume configuration"
+  default     = {}
+  type        = any
+}

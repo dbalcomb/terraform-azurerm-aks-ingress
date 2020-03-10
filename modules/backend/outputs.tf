@@ -22,3 +22,8 @@ output "replicas" {
   description = "The replica count"
   value       = var.replicas
 }
+
+output "volumes" {
+  description = "The volume configuration"
+  value       = var.volumes
+}
