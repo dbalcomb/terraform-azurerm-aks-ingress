@@ -3,6 +3,12 @@ variable "name" {
   type        = string
 }
 
+variable "namespace" {
+  description = "The backend namespace"
+  default     = null
+  type        = string
+}
+
 variable "image" {
   description = "The docker image name"
   type        = string

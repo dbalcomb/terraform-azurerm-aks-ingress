@@ -9,16 +9,22 @@ locals {
 }
 
 resource "kubernetes_namespace" "main" {
+  count = var.namespace == null ? 1 : 0
+
   metadata {
     name   = var.name
     labels = local.labels
   }
 }
 
+locals {
+  namespace = var.namespace == null ? kubernetes_namespace.main.0.metadata.0.name : var.namespace
+}
+
 resource "kubernetes_service" "main" {
   metadata {
     name      = var.name
-    namespace = kubernetes_namespace.main.metadata.0.name
+    namespace = local.namespace
     labels    = local.labels
   }
 
@@ -38,7 +44,7 @@ resource "kubernetes_service" "main" {
 resource "kubernetes_deployment" "main" {
   metadata {
     name      = var.name
-    namespace = kubernetes_namespace.main.metadata.0.name
+    namespace = local.namespace
     labels    = local.labels
   }
 
@@ -73,7 +79,7 @@ resource "kubernetes_deployment" "main" {
 resource "kubernetes_pod_disruption_budget" "main" {
   metadata {
     name      = format("%s-pdb", var.name)
-    namespace = kubernetes_namespace.main.metadata.0.name
+    namespace = local.namespace
     labels    = local.labels
   }
 
