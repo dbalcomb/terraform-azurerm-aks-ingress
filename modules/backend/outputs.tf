@@ -5,7 +5,7 @@ output "name" {
 
 output "namespace" {
   description = "The backend namespace"
-  value       = kubernetes_namespace.main.metadata.0.name
+  value       = local.namespace
 }
 
 output "port" {

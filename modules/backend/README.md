@@ -10,19 +10,21 @@ to requests routed via the ingress controller.
 module "backend" {
   source = "github.com/dbalcomb/terraform-azurerm-aks-ingress//modules/backend"
 
-  name     = "aks-backend"
-  image    = "nginx:latest"
-  replicas = 3
+  name      = "aks-backend"
+  namespace = "aks-backend"
+  image     = "nginx:latest"
+  replicas  = 3
 }
 ```
 
 ## Inputs
 
-| Name       | Type     | Default   | Description           |
-| ---------- | -------- | --------- | --------------------- |
-| `name`     | `string` |           | The backend name      |
-| `image`    | `string` |           | The docker image name |
-| `replicas` | `number` | `1`       | The replica count     |
+| Name        | Type     | Default   | Description                                         |
+| ----------- | -------- | --------- | --------------------------------------------------- |
+| `name`      | `string` |           | The backend name                                    |
+| `namespace` | `string` | `null`    | The backend namespace or `null` to create a new one |
+| `image`     | `string` |           | The docker image name                               |
+| `replicas`  | `number` | `1`       | The replica count                                   |
 
 ## Outputs
 
