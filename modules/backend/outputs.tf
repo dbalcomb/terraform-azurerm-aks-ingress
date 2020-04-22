@@ -23,7 +23,18 @@ output "replicas" {
   value       = var.replicas
 }
 
-output "volumes" {
-  description = "The volume configuration"
-  value       = var.volumes
+output "configs" {
+  description = "The config volume mount configuration"
+  value       = local.configs
+}
+
+output "secrets" {
+  description = "The secret volume mount configuration"
+  value       = local.secrets
+}
+
+output "files" {
+  description = "The file share volume mount configuration"
+  value       = local.files
+  sensitive   = true
 }

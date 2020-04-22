@@ -21,54 +21,42 @@ module "backend" {
   image     = "nginx:latest"
   replicas  = 3
 
-  volumes = {
-    one = {
-      name = "one"
-      type = "config"
-      path = "/azure/config"
+  configs = {
+    config = {
+      name = "config"
+      path = "/config"
+      mode = "0644"
 
       config = {
         name = "aks-ingress-backend-config"
-        mode = "0777"
-
-        items = [
-          {
-            name = "one.yml"
-            mode = "0644"
-            path = "path/to/one.yml"
-          },
-          {
-            name = "two.yml"
-            mode = "0700"
-            path = "path/to/two.yml"
-          }
-        ]
       }
     }
+  }
 
-    two = {
-      name = "two"
-      type = "secret"
-      path = "/azure/secret"
+  secrets = {
+    secret = {
+      name = "secret"
+      path = "/secret"
+      mode = "0644"
 
       secret = {
         name = "aks-ingress-backend-secret"
-        mode = "0777"
       }
     }
+  }
 
-    three = {
-      name      = "three"
-      type      = "share"
-      path      = "/azure/share"
-      directory = "production"
-      read_only = true
+  files = {
+    files = {
+      name   = "files"
+      source = "files"
+      target = "/files"
+      write  = false
 
       share = {
         name = "myshare"
 
         account = {
-          name = "myaccount"
+          name = "mystorageaccount"
           keys = ["key"]
         }
       }
