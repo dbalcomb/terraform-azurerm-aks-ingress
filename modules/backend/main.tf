@@ -42,49 +42,54 @@ resource "kubernetes_service" "main" {
 }
 
 locals {
-  volumes = {
-    for key, volume in var.volumes : key => {
-      type      = volume.type
-      name      = try(volume.name, key)
-      path      = try(volume.path, format("/azure/%s", try(volume.name, key)))
-      directory = try(volume.directory, "")
-      read_only = try(volume.read_only, false)
+  configs = {
+    for key, entry in var.configs : key => {
+      name = try(entry.name, key)
+      path = try(entry.path, format("/configs/%s", try(entry.name, key)))
+      mode = try(entry.mode, "0644")
 
-      config = volume.type != "config" ? null : {
-        name = volume.config.name
-        mode = try(volume.config.mode, "0644")
-
-        items = [
-          for item in try(volume.config.items, []) : {
-            name = item.name
-            path = item.path
-            mode = try(item.mode, null)
-          }
-        ]
+      config = {
+        name = entry.config.name
       }
+    }
+  }
 
-      secret = volume.type != "secret" ? null : {
-        name = volume.secret.name
-        mode = try(volume.secret.mode, "0644")
+  secrets = {
+    for key, entry in var.secrets : key => {
+      name = try(entry.name, key)
+      path = try(entry.path, format("/secrets/%s", try(entry.name, key)))
+      mode = try(entry.mode, "0644")
 
-        items = [
-          for item in try(volume.secret.items, []) : {
-            name = item.name
-            path = item.path
-            mode = try(item.mode, null)
-          }
-        ]
+      secret = {
+        name = entry.secret.name
       }
+    }
+  }
 
-      share = volume.type != "share" ? null : {
-        name = volume.share.name
+  files = {
+    for key, entry in var.files : key => {
+      name   = try(entry.name, key)
+      source = try(entry.source, "")
+      target = try(entry.target, format("/files/%s", try(entry.name, key)))
+      write  = try(entry.write, true)
+
+      share = {
+        name = entry.share.name
 
         account = {
-          name = volume.share.account.name
-          keys = volume.share.account.keys
+          name = entry.share.account.name
+          keys = entry.share.account.keys
         }
       }
     }
+  }
+
+  shares = {
+    for key, entry in local.files : entry.share.name => entry.share
+  }
+
+  accounts = {
+    for key, entry in local.shares : entry.account.name => entry.account
   }
 }
 
@@ -119,69 +124,75 @@ resource "kubernetes_deployment" "main" {
           }
 
           dynamic "volume_mount" {
-            for_each = local.volumes
+            for_each = local.configs
 
             content {
-              name       = volume_mount.value.name
+              name       = format("config_%s", volume_mount.value.name)
               mount_path = volume_mount.value.path
-              sub_path   = volume_mount.value.directory
-              read_only  = volume_mount.value.read_only
+              sub_path   = ""
+              read_only  = false
+            }
+          }
+
+          dynamic "volume_mount" {
+            for_each = local.secrets
+
+            content {
+              name       = format("secret_%s", volume_mount.value.name)
+              mount_path = volume_mount.value.path
+              sub_path   = ""
+              read_only  = false
+            }
+          }
+
+          dynamic "volume_mount" {
+            for_each = local.files
+
+            content {
+              name       = format("file_%s", volume_mount.value.name)
+              mount_path = volume_mount.value.target
+              sub_path   = volume_mount.value.source
+              read_only  = volume_mount.value.write ? false : true
             }
           }
         }
 
         dynamic "volume" {
-          for_each = local.volumes
+          for_each = local.configs
 
           content {
-            name = volume.value.name
+            name = format("config_%s", volume.value.name)
 
-            dynamic "config_map" {
-              for_each = volume.value.type == "config" ? [""] : []
-
-              content {
-                name         = volume.value.config.name
-                default_mode = volume.value.config.mode
-
-                dynamic "items" {
-                  for_each = volume.value.config.items
-
-                  content {
-                    key  = items.value.name
-                    mode = items.value.mode
-                    path = items.value.path
-                  }
-                }
-              }
+            config_map {
+              name         = volume.value.config.name
+              default_mode = volume.value.mode
             }
+          }
+        }
 
-            dynamic "secret" {
-              for_each = volume.value.type == "secret" ? [""] : []
+        dynamic "volume" {
+          for_each = local.secrets
 
-              content {
-                secret_name  = volume.value.secret.name
-                default_mode = volume.value.secret.mode
+          content {
+            name = format("secret_%s", volume.value.name)
 
-                dynamic "items" {
-                  for_each = volume.value.secret.items
-
-                  content {
-                    key  = items.value.name
-                    mode = items.value.mode
-                    path = items.value.path
-                  }
-                }
-              }
+            secret {
+              secret_name  = volume.value.secret.name
+              default_mode = volume.value.mode
             }
+          }
+        }
 
-            dynamic "azure_file" {
-              for_each = volume.value.type == "share" ? [""] : []
+        dynamic "volume" {
+          for_each = local.files
 
-              content {
-                secret_name = kubernetes_secret.volume[volume.key].metadata.0.name
-                share_name  = volume.value.share.name
-                read_only   = volume.value.read_only
-              }
+          content {
+            name = format("file_%s", volume.value.name)
+
+            azure_file {
+              secret_name = kubernetes_secret.account[volume.value.share.account.name].metadata.0.name
+              share_name  = volume.value.share.name
+              read_only   = volume.value.write ? false : true
             }
           }
         }
@@ -206,20 +217,17 @@ resource "kubernetes_pod_disruption_budget" "main" {
   }
 }
 
-resource "kubernetes_secret" "volume" {
-  for_each = {
-    for key, volume in local.volumes : key => volume
-    if volume.type == "share"
-  }
+resource "kubernetes_secret" "account" {
+  for_each = local.accounts
 
   metadata {
-    name      = format("%s-%s-volume", var.name, each.key)
+    name      = format("%s-%s-account", var.name, each.key)
     namespace = local.namespace
     labels    = local.labels
   }
 
   data = {
-    azurestorageaccountname = each.value.share.account.name
-    azurestorageaccountkey  = each.value.share.account.keys.0
+    azurestorageaccountname = each.value.name
+    azurestorageaccountkey  = each.value.keys.0
   }
 }

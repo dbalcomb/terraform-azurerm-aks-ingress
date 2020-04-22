@@ -20,8 +20,20 @@ variable "replicas" {
   type        = number
 }
 
-variable "volumes" {
-  description = "The volume configuration"
+variable "configs" {
+  description = "The config volume mount configuration"
+  default     = {}
+  type        = any
+}
+
+variable "secrets" {
+  description = "The secret volume mount configuration"
+  default     = {}
+  type        = any
+}
+
+variable "files" {
+  description = "The file share volume mount configuration"
   default     = {}
   type        = any
 }
