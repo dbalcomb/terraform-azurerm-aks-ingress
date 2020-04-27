@@ -127,7 +127,7 @@ resource "kubernetes_deployment" "main" {
             for_each = local.configs
 
             content {
-              name       = format("config_%s", volume_mount.value.name)
+              name       = format("config-%s", volume_mount.value.name)
               mount_path = volume_mount.value.path
               sub_path   = ""
               read_only  = false
@@ -138,7 +138,7 @@ resource "kubernetes_deployment" "main" {
             for_each = local.secrets
 
             content {
-              name       = format("secret_%s", volume_mount.value.name)
+              name       = format("secret-%s", volume_mount.value.name)
               mount_path = volume_mount.value.path
               sub_path   = ""
               read_only  = false
@@ -149,7 +149,7 @@ resource "kubernetes_deployment" "main" {
             for_each = local.files
 
             content {
-              name       = format("file_%s", volume_mount.value.name)
+              name       = format("file-%s", volume_mount.value.name)
               mount_path = volume_mount.value.target
               sub_path   = volume_mount.value.source
               read_only  = volume_mount.value.write ? false : true
@@ -161,7 +161,7 @@ resource "kubernetes_deployment" "main" {
           for_each = local.configs
 
           content {
-            name = format("config_%s", volume.value.name)
+            name = format("config-%s", volume.value.name)
 
             config_map {
               name         = volume.value.config.name
@@ -174,7 +174,7 @@ resource "kubernetes_deployment" "main" {
           for_each = local.secrets
 
           content {
-            name = format("secret_%s", volume.value.name)
+            name = format("secret-%s", volume.value.name)
 
             secret {
               secret_name  = volume.value.secret.name
@@ -187,7 +187,7 @@ resource "kubernetes_deployment" "main" {
           for_each = local.files
 
           content {
-            name = format("file_%s", volume.value.name)
+            name = format("file-%s", volume.value.name)
 
             azure_file {
               secret_name = kubernetes_secret.account[volume.value.share.account.name].metadata.0.name
