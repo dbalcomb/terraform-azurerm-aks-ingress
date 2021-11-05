@@ -14,6 +14,8 @@ resource "kubernetes_service_account" "main" {
     namespace = var.namespace
     labels    = local.labels
   }
+
+  automount_service_account_token = false
 }
 
 resource "kubernetes_service" "main" {
