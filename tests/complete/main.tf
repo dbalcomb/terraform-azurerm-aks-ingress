@@ -76,7 +76,7 @@ module "route" {
   }
 
   ingress = {
-    class = "traefik"
+    class = "nginx"
   }
 
   issuer = {

@@ -30,10 +30,9 @@ module "ip_address" {
 module "controller" {
   source = "./modules/controller"
 
-  name       = format("%s-controller", var.name)
+  name       = var.name
   namespace  = kubernetes_namespace.main.metadata.0.name
   replicas   = var.replicas
-  image      = var.image
   class      = var.class
   metrics    = var.metrics
   ip_address = module.ip_address
