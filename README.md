@@ -24,17 +24,16 @@ module "aks_ingress" {
 
 ## Inputs
 
-| Name                           | Type     | Default        | Description                                 |
-| ------------------------------ | -------- | -------------- | ------------------------------------------- |
-| `name`                         | `string` |                | The ingress name                            |
-| `region`                       | `string` |                | The ingress region                          |
-| `replicas`                     | `number` | `1`            | The ingress replica count                   |
-| `image`                        | `string` | `traefik:v1.7` | The ingress docker image                    |
-| `class`                        | `string` | `traefik`      | The ingress class                           |
-| `metrics`                      | `bool`   | `false`        | Enable prometheus metrics                   |
-| `cluster`                      | `object` |                | The cluster configuration                   |
-| `cluster.service_principal`    | `object` |                | The cluster service principal configuration |
-| `cluster.service_principal.id` | `string` |                | The cluster service principal ID            |
+| Name                           | Type     | Default | Description                                 |
+| ------------------------------ | -------- | ------- | ------------------------------------------- |
+| `name`                         | `string` |         | The ingress name                            |
+| `region`                       | `string` |         | The ingress region                          |
+| `replicas`                     | `number` | `1`     | The ingress replica count                   |
+| `class`                        | `string` | `nginx` | The ingress class                           |
+| `metrics`                      | `bool`   | `false` | Enable prometheus metrics                   |
+| `cluster`                      | `object` |         | The cluster configuration                   |
+| `cluster.service_principal`    | `object` |         | The cluster service principal configuration |
+| `cluster.service_principal.id` | `string` |         | The cluster service principal ID            |
 
 ## Outputs
 
@@ -43,7 +42,6 @@ module "aks_ingress" {
 | `name`       | `string` | The ingress name             |
 | `region`     | `string` | The ingress region           |
 | `replicas`   | `number` | The ingress replica count    |
-| `image`      | `string` | The ingress docker image     |
 | `class`      | `string` | The ingress class            |
 | `metrics`    | `bool`   | Enable prometheus metrics    |
 | `cluster`    | `string` | The cluster configuration    |

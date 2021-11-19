@@ -15,13 +15,14 @@ resource "kubernetes_ingress" "main" {
     labels    = local.labels
 
     annotations = {
-      "kubernetes.io/ingress.class"                        = var.ingress.class
-      "cert-manager.io/cluster-issuer"                     = try(var.issuer.name, null)
-      "traefik.ingress.kubernetes.io/redirect-entry-point" = can(var.issuer.name) ? "https" : null
+      "cert-manager.io/cluster-issuer"           = try(var.issuer.name, null)
+      "nginx.ingress.kubernetes.io/ssl-redirect" = can(var.issuer.name) ? "true" : "false"
     }
   }
 
   spec {
+    ingress_class_name = var.ingress.class
+
     rule {
       host = var.host.name
 

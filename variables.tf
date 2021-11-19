@@ -14,15 +14,9 @@ variable "replicas" {
   type        = number
 }
 
-variable "image" {
-  description = "The ingress docker image"
-  default     = "traefik:v1.7"
-  type        = string
-}
-
 variable "class" {
   description = "The ingress class"
-  default     = "traefik"
+  default     = "nginx"
   type        = string
 }
 

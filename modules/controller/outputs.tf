@@ -13,11 +13,6 @@ output "replicas" {
   value       = var.replicas
 }
 
-output "image" {
-  description = "The ingress controller docker image"
-  value       = var.image
-}
-
 output "class" {
   description = "The ingress class"
   value       = var.class
