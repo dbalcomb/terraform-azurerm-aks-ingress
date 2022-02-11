@@ -8,6 +8,11 @@ locals {
   }
 }
 
+locals {
+  host  = try(var.host.name, var.host)
+  hosts = concat(local.host == null ? [] : [local.host], [for host in var.hosts : try(host.name, host)])
+}
+
 resource "kubernetes_ingress" "main" {
   metadata {
     name      = var.name
@@ -23,16 +28,20 @@ resource "kubernetes_ingress" "main" {
   spec {
     ingress_class_name = var.ingress.class
 
-    rule {
-      host = var.host.name
+    dynamic "rule" {
+      for_each = local.hosts
 
-      http {
-        path {
-          path = var.path
+      content {
+        host = rule.value
 
-          backend {
-            service_name = var.backend.name
-            service_port = var.backend.port
+        http {
+          path {
+            path = var.path
+
+            backend {
+              service_name = var.backend.name
+              service_port = var.backend.port
+            }
           }
         }
       }
@@ -43,7 +52,7 @@ resource "kubernetes_ingress" "main" {
 
       content {
         secret_name = format("%s-tls", var.name)
-        hosts       = [var.host.name]
+        hosts       = local.hosts
       }
     }
   }

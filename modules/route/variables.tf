@@ -11,9 +11,14 @@ variable "path" {
 
 variable "host" {
   description = "The host configuration"
-  type = object({
-    name = string
-  })
+  default     = null
+  type        = any
+}
+
+variable "hosts" {
+  description = "The hosts configuration"
+  default     = []
+  type        = list(any)
 }
 
 variable "backend" {
