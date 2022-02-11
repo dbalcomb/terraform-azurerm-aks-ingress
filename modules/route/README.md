@@ -44,20 +44,23 @@ module "route" {
 
 ## Inputs
 
-| Name                | Type     | Default | Description               |
-| ------------------- | -------- | ------- | ------------------------- |
-| `name`              | `string` |         | The route name            |
-| `path`              | `string` | `/`     | The route path            |
-| `host`              | `object` |         | The host configuration    |
-| `host.name`         | `string` |         | The host name             |
-| `backend`           | `object` |         | The backend configuration |
-| `backend.name`      | `string` |         | The backend name          |
-| `backend.namespace` | `string` |         | The backend namespace     |
-| `backend.port`      | `number` |         | The backend port          |
-| `ingress`           | `object` |         | The ingress configuration |
-| `ingress.class`     | `string` |         | The ingress class         |
-| `issuer`            | `object` | `null`  | The issuer configuration  |
-| `issuer.name`       | `string` |         | The issuer name           |
+| Name                | Type                | Default | Description               |
+| ------------------- | ------------------- | ------- | ------------------------- |
+| `name`              | `string`            |         | The route name            |
+| `path`              | `string`            | `/`     | The route path            |
+| `host`              | `string` / `object` | `null`  | The host configuration    |
+| `host.name`         | `string`            |         | The host name             |
+| `hosts`             | `list`              | `[]`    | The hosts configuration   |
+| `hosts.*`           | `string` / `object` |         | The host configuration    |
+| `hosts.*.name`      | `string`            |         | The host name             |
+| `backend`           | `object`            |         | The backend configuration |
+| `backend.name`      | `string`            |         | The backend name          |
+| `backend.namespace` | `string`            |         | The backend namespace     |
+| `backend.port`      | `number`            |         | The backend port          |
+| `ingress`           | `object`            |         | The ingress configuration |
+| `ingress.class`     | `string`            |         | The ingress class         |
+| `issuer`            | `object`            | `null`  | The issuer configuration  |
+| `issuer.name`       | `string`            |         | The issuer name           |
 
 ## Outputs
 
@@ -65,7 +68,8 @@ module "route" {
 | --------- | -------- | ------------------------- |
 | `name`    | `string` | The route name            |
 | `path`    | `string` | The route path            |
-| `host`    | `object` | The host configuration    |
+| `hosts`   | `list`   | The hosts configuration   |
+| `hosts.*` | `string` | The host name             |
 | `backend` | `object` | The backend configuration |
 | `ingress` | `object` | The ingress configuration |
 | `issuer`  | `object` | The issuer configuration  |

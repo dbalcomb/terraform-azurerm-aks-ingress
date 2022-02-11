@@ -8,9 +8,9 @@ output "path" {
   value       = var.path
 }
 
-output "host" {
-  description = "The host configuration"
-  value       = var.host
+output "hosts" {
+  description = "The hosts configuration"
+  value       = local.hosts
 }
 
 output "backend" {
