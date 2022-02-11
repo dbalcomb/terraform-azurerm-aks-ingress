@@ -38,3 +38,9 @@ output "files" {
   value       = local.files
   sensitive   = true
 }
+
+output "env" {
+  description = "The environment variables"
+  value       = var.env
+  sensitive   = true
+}

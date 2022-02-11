@@ -123,6 +123,15 @@ resource "kubernetes_deployment" "main" {
             container_port = 80
           }
 
+          dynamic "env" {
+            for_each = var.env
+
+            content {
+              name  = env.key
+              value = env.value
+            }
+          }
+
           dynamic "volume_mount" {
             for_each = local.configs
 

@@ -37,3 +37,9 @@ variable "files" {
   default     = {}
   type        = any
 }
+
+variable "env" {
+  description = "The environment variables"
+  default     = {}
+  type        = map(string)
+}

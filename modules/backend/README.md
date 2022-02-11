@@ -93,6 +93,8 @@ module "backend" {
 | `files.*.share.account.name`   | `string` |            | The storage account name                            |
 | `files.*.share.account.keys`   | `list`   |            | The storage account access keys                     |
 | `files.*.share.account.keys.*` | `string` |            | A storage account access key                        |
+| `env`                          | `object` | `{}`       | The environment variables                           |
+| `env.*`                        | `string` |            | The environment variable value                      |
 
 ## Outputs
 
@@ -106,3 +108,4 @@ module "backend" {
 | `configs`   | `object` | The config volume mount configuration     |
 | `secrets`   | `object` | The secret volume mount configuration     |
 | `files`     | `object` | The file share volume mount configuration |
+| `env`       | `object` | The environment variables                 |
