@@ -9,7 +9,8 @@ locals {
 }
 
 locals {
-  hosts = [for host in (var.host == null ? var.hosts : concat([var.host], var.hosts)) : can(host.name) ? host.name : host]
+  host  = try(var.host.name, var.host)
+  hosts = concat(local.host == null ? [] : [local.host], [for host in var.hosts : try(host.name, host)])
 }
 
 resource "kubernetes_ingress" "main" {
