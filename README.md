@@ -53,6 +53,7 @@ module "aks_ingress" {
 - [Controller](modules/controller/README.md)
 - [IP Address](modules/ip-address/README.md)
 - [Backend](modules/backend/README.md)
+- [Redirect](modules/redirect/README.md)
 - [Route](modules/route/README.md)
 
 ## External Modules
